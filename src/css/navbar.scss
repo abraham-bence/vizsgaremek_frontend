@@ -1,0 +1,21 @@
+.my-navbar {
+    background: linear-gradient(to bottom, rgb(0, 0, 0, 1), rgb(0, 0, 0, 0.3));
+    // background: linear-gradient(90deg, #4a91e248, #FF6B6B);
+    position: fixed !important;
+    width: 100%;
+    .navbar-brand {
+        color: white;
+
+        &:hover {
+            color: rgba(255, 255, 255, 0.548) !important;
+        }
+    }
+
+    .nav-link {
+        color: white;
+
+        &:hover {
+            color: rgba(255, 255, 255, 0.548) !important;
+        }
+    }
+}

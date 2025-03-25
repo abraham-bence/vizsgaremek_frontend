@@ -1,8 +1,21 @@
 import React from 'react'
+import NavigationBar from '../components/navbar'
+import TypesContainer from '../components/typesContainer'
+import Products from './products'
 
 function Home() {
   return (
-    <div>Home</div>
+    <div>
+      <NavigationBar />
+      <div className="hero">
+        <div className="hero-overlay">
+          <h1>Build your PC with us!</h1>
+        </div>
+      </div>
+      <TypesContainer/>
+      <Products/>
+      
+    </div>
   )
 }
 
