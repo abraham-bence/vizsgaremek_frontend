@@ -5,6 +5,9 @@ import Home from './pages/home'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './css/index.scss'
 import ProductPage from './pages/productPage'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -16,13 +19,15 @@ const router = createBrowserRouter([
     element: <Home />
   },
   {
-    path : '/products',
-    element: <ProductPage/>
+    path: '/products',
+    element: <ProductPage />
   }
 ])
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router}/>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </StrictMode>,
 )
