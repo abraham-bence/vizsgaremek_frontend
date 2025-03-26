@@ -1,13 +1,30 @@
 .my-navbar {
-    background: linear-gradient(to bottom, rgb(0, 0, 0, 1), rgb(0, 0, 0, 0.3));
+    // background: linear-gradient(to bottom, rgb(0, 0, 0, 1), rgb(0, 0, 0, 0.3));
     // background: linear-gradient(90deg, #4a91e248, #FF6B6B);
     position: fixed !important;
     width: 100%;
     .navbar-brand {
         color: white;
+        position: relative;
 
         &:hover {
             color: rgba(255, 255, 255, 0.548) !important;
+        }
+        &::before{
+            content: "";
+            background-image: url(../assets/logo1.png);
+            background-size:cover;
+            background-repeat: no-repeat;
+            aspect-ratio: 5 / 4;
+
+            position: absolute;
+            width: 50px;
+            z-index: -10;
+            top: 0;
+            left: 0;
+            transform: translate(-120%, 0);
+
+
         }
     }
 
