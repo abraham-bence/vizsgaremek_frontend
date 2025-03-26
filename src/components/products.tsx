@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import NavigationBar from '../components/navbar'
 import axios from "axios";
 import { Col, Row } from 'react-bootstrap';
 import ProductCard from '../components/productCard';
@@ -9,29 +8,24 @@ export interface Product {
     name: string
     type: string
     price: number
-    imgSrc : string
+    imgSrc: string
+    manufacturer: string
+}
+
+interface Props {
+    data : Product[]
 }
 
 
-function Products() {
-    const [products, setProducts] = useState<Product[]>([])
-
-
-
-    useEffect(() => {
-        axios.get("http://localhost:3000/product")
-            .then((response) => {
-                setProducts(response.data)
-            })
-    })
+function Products({data} : Props) {
 
     return (
         <>
             {/* <NavigationBar /> */}
             <Row xs={1} md={4} className="g-4 productContainer">
-                {products?.map((product) => (
+                {data?.map((product) => (
                     <Col key={product.id}>
-                        <ProductCard product={product}/>
+                        <ProductCard product={product} />
                     </Col>
 
                 ))}

@@ -1,9 +1,13 @@
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
 import "../css/navbar.scss"
 
-function NavigationBar() {
+interface Props{
+    className: string
+}
+
+function NavigationBar({className}: Props) {
     return (
-        <Navbar className="my-navbar" expand="lg">
+        <Navbar className={className} expand="lg">
             <Container>
                 <Navbar.Brand href="/">PixelForge</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

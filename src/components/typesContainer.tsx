@@ -15,7 +15,7 @@ function TypesContainer() {
     const [types, setTypes] = useState<Type[]>()
 
     useEffect(() => {
-        axios.get<Type[]>('http://localhost:3000/product/types')
+        axios.get<Type[]>('http://localhost:3000/product/filter/type')
             .then((response) => {
                 // handle success
                 setTypes(response.data)
@@ -24,12 +24,12 @@ function TypesContainer() {
                 // handle error
                 console.log(error);
             })
-    })
+    }, [])
     return (
         <div className='cardContainer mt-4'>
             {types?.map((type, i: number) => (
-                <div className="item">
-                    <TypesCard key={i++} type={type.type} />
+                <div className="item" key={i}>
+                    <TypesCard  type={type.type} />
                 </div>
 
             ))}

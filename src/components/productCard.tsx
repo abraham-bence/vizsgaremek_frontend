@@ -1,5 +1,5 @@
 import React from 'react'
-import { Product } from '../pages/products'
+import { Product } from '../components/products'
 import { Card } from 'react-bootstrap'
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 function ProductCard({ product }: Props) {
     return (
         <Card>
-            <Card.Img variant="top" src={product.imgSrc}/>
+            {/* <Card.Img variant="top" src={product.imgSrc}/> */}
             <Card.Body>
                 <Card.Title>{product.name}</Card.Title>
                 <Card.Text>
