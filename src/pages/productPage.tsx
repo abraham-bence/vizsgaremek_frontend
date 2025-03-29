@@ -4,20 +4,29 @@ import NavigationBar from '../components/navbar';
 import Products, { Product } from '../components/products';
 import Filter from '../components/filter';
 import '../css/productPage.scss';
-import axios from 'axios';
 import { useProducts } from '../core/hooks';
 
 function ProductPage() {
-    const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+    const [selectedType, setSelectedTypes] = useState<string>('ALL');
     const [selectedManufacturers, setSelectedManufacturers] = useState<string[]>([]);
     const [filteredData, setFilteredData] = useState<Product[]>([]);
+
+
     const getProducts = useProducts()
     const products = useMemo(() => getProducts.data ?? [], [getProducts.data]);
 
     // Toggle type selection
     const toggleType = (type: string) => {
-        setSelectedTypes((prev) =>
-            prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+        setSelectedTypes((prev) => {
+            if(prev == type) {
+                setSelectedManufacturers([])
+                return 'ALL'
+            }
+            else {
+                setSelectedManufacturers([])
+                return type
+            }
+        }
         );
     };
 
@@ -32,8 +41,8 @@ function ProductPage() {
     useEffect(() => {
         let filtered = products;
 
-        if (selectedTypes.length > 0) {
-            filtered = filtered.filter((product) => selectedTypes.includes(product.type));
+        if (selectedType != 'ALL') {
+            filtered = filtered.filter((product) => selectedType == product.type);
         }
 
         if (selectedManufacturers.length > 0) {
@@ -41,7 +50,7 @@ function ProductPage() {
         }
 
         setFilteredData(filtered);
-    }, [selectedTypes, selectedManufacturers, products]);
+    }, [selectedType, selectedManufacturers, products]);
 
     return (
         <div>
@@ -50,7 +59,7 @@ function ProductPage() {
                 <Row>
                     <Col sm={2}>
                         <Filter
-                            selectedTypes={selectedTypes}
+                            selectedType={selectedType}
                             selectedManufacturers={selectedManufacturers}
                             toggleType={toggleType}
                             toggleManufacturer={toggleManufacturer}

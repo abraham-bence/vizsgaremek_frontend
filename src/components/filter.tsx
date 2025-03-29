@@ -1,39 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
+import { useProducts, useProperties, usePropertiesWhere } from '../core/hooks';
 
 interface Manufacturer { manufacturer: string }
 interface Type { type: string }
 
 interface FilterProps {
-  selectedTypes: string[];
+  selectedType: string;
   selectedManufacturers: string[];
   toggleType: (type: string) => void;
   toggleManufacturer: (manufacturer: string) => void;
 }
 
-function Filter({ selectedTypes, selectedManufacturers, toggleType, toggleManufacturer }: FilterProps) {
-  const [manufacturers, setManufacturers] = useState<Manufacturer[]>([]);
-  const [types, setTypes] = useState<Type[]>([]);
+function Filter({ selectedType, selectedManufacturers, toggleType, toggleManufacturer }: FilterProps) {
   const [filteredManufacturers, setFilteredManufacturers] = useState<Manufacturer[]>([]);
+  const getProducts = useProducts()
+  const products = useMemo(() => getProducts.data ?? [], [getProducts.data]);
 
-  useEffect(() => {
-    axios.get("http://localhost:3000/products/filter/type")
-      .then((response) => setTypes(response.data));
-  }, []);
 
-  useEffect(() => {
-    axios.get("http://localhost:3000/products/filter/manufacturer")
-      .then((response) => setManufacturers(response.data));
-  }, []);
+  const getTypes = useProperties('type')
+  const types: Type[] = useMemo(() => getTypes.data ?? [], [getTypes.data]);
+  const getManufaturers = useProperties('manufacturer')
+  const manufacturers: Manufacturer[] = useMemo(() => getManufaturers.data ?? [], [getManufaturers.data]);
+
+
+  const getFilteredManufacturers = () => {
+    axios.get('http://localhost:3000/products/filter/manufacturer/' + selectedType)
+      .then((res) => {
+        setFilteredManufacturers(res.data)
+      })
+  }
 
   // Filter manufacturers based on selected product types
   useEffect(() => {
-    if (selectedTypes.length === 0) {
+    if (selectedType === 'ALL') {
       setFilteredManufacturers(manufacturers);
     } else {
-      setFilteredManufacturers();
+      getFilteredManufacturers();
     }
-  }, [selectedTypes, manufacturers]);
+  }, [selectedType, manufacturers]);
 
   return (
     <div className="filter">
@@ -43,7 +48,7 @@ function Filter({ selectedTypes, selectedManufacturers, toggleType, toggleManufa
           <input
             type="checkbox"
             id={type.type}
-            checked={selectedTypes.includes(type.type)}
+            checked={selectedType == type.type}
             onChange={() => toggleType(type.type)}
           />
           <label htmlFor={type.type}>{type.type}</label>
@@ -58,12 +63,18 @@ function Filter({ selectedTypes, selectedManufacturers, toggleType, toggleManufa
             id={manufacturer.manufacturer}
             checked={selectedManufacturers.includes(manufacturer.manufacturer)}
             onChange={() => toggleManufacturer(manufacturer.manufacturer)}
-            disabled={filteredManufacturers.length === 0} 
+            disabled={filteredManufacturers.length === 0}
           />
           <label htmlFor={manufacturer.manufacturer}>{manufacturer.manufacturer}</label>
         </div>
       ))}
+
+      
+
+
+
     </div>
+
   );
 }
 
