@@ -17,12 +17,12 @@ function Filter({ selectedTypes, selectedManufacturers, toggleType, toggleManufa
   const [filteredManufacturers, setFilteredManufacturers] = useState<Manufacturer[]>([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/product/filter/type")
+    axios.get("http://localhost:3000/products/filter/type")
       .then((response) => setTypes(response.data));
   }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/product/filter/manufacturer")
+    axios.get("http://localhost:3000/products/filter/manufacturer")
       .then((response) => setManufacturers(response.data));
   }, []);
 
@@ -31,8 +31,7 @@ function Filter({ selectedTypes, selectedManufacturers, toggleType, toggleManufa
     if (selectedTypes.length === 0) {
       setFilteredManufacturers(manufacturers);
     } else {
-      axios.get(`http://localhost:3000/product/filter/manufacturer?types=${selectedTypes.join(",")}`)
-        .then((response) => setFilteredManufacturers(response.data));
+      setFilteredManufacturers();
     }
   }, [selectedTypes, manufacturers]);
 

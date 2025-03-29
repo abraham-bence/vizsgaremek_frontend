@@ -5,9 +5,8 @@ import Home from './pages/home'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './css/index.scss'
 import ProductPage from './pages/productPage'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
-const queryClient = new QueryClient();
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from './core/api'
 
 const router = createBrowserRouter([
   {

@@ -8,14 +8,12 @@ interface Type {
     type: string
 }
 
-
-
 function TypesContainer() {
 
     const [types, setTypes] = useState<Type[]>()
 
     useEffect(() => {
-        axios.get<Type[]>('http://localhost:3000/product/filter/type')
+        axios.get<Type[]>('http://localhost:3000/products/filter/type')
             .then((response) => {
                 // handle success
                 setTypes(response.data)

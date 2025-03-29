@@ -1,24 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import NavigationBar from '../components/navbar';
 import Products, { Product } from '../components/products';
 import Filter from '../components/filter';
 import '../css/productPage.scss';
 import axios from 'axios';
+import { useProducts } from '../core/hooks';
 
 function ProductPage() {
     const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
     const [selectedManufacturers, setSelectedManufacturers] = useState<string[]>([]);
     const [filteredData, setFilteredData] = useState<Product[]>([]);
-    const [products, setProducts] = useState<Product[]>([]);
-
-    useEffect(() => {
-        axios.get("http://localhost:3000/product")
-            .then((response) => {
-                setProducts(response.data);
-                setFilteredData(response.data);
-            });
-    }, []);
+    const getProducts = useProducts()
+    const products = useMemo(() => getProducts.data ?? [], [getProducts.data]);
 
     // Toggle type selection
     const toggleType = (type: string) => {
@@ -55,11 +49,11 @@ function ProductPage() {
             <Container className='mt-5'>
                 <Row>
                     <Col sm={2}>
-                        <Filter 
-                            selectedTypes={selectedTypes} 
-                            selectedManufacturers={selectedManufacturers} 
-                            toggleType={toggleType} 
-                            toggleManufacturer={toggleManufacturer} 
+                        <Filter
+                            selectedTypes={selectedTypes}
+                            selectedManufacturers={selectedManufacturers}
+                            toggleType={toggleType}
+                            toggleManufacturer={toggleManufacturer}
                         />
                     </Col>
                     <Col sm={10}>
