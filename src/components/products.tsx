@@ -20,7 +20,6 @@ interface Props {
 
 function Products({data} : Props) {
     const getProducts = useProducts()
-    const products = getProducts.data ?? [];
 
   if (getProducts.isLoading) {
     return (
@@ -34,7 +33,7 @@ function Products({data} : Props) {
         <>
             {/* <NavigationBar /> */}
             <Row xs={1} md={4} className="g-4 productContainer">
-                {products?.map((product) => (
+                {data?.map((product) => (
                     <Col key={product.id}>
                         <ProductCard product={product} />
                     </Col>

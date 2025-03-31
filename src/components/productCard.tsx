@@ -9,7 +9,7 @@ interface Props {
 function ProductCard({ product }: Props) {
     return (
         <Card>
-            {/* <Card.Img variant="top" src={product.imgSrc}/> */}
+            <Card.Img variant="top" src={'http://localhost:3000/uploads/' + product.imgSrc}/>
             <Card.Body>
                 <Card.Title>{product.name}</Card.Title>
                 <Card.Text>
