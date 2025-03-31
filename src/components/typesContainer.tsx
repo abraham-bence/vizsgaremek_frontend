@@ -1,33 +1,45 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import axios from 'axios';
 import TypesCard from './typesCard';
 import "../css/typesContainer.scss"
+import { useProperties } from '../core/hooks';
+import { useSearchParams } from 'react-router-dom';
 
 
 interface Type {
     type: string
 }
 
+
+
 function TypesContainer() {
+    const getTypes = useProperties('type')
+    const types: Type[] = useMemo(() => getTypes.data ?? [], [getTypes.data]);
 
-    const [types, setTypes] = useState<Type[]>()
+    const [search, setSearch] = useSearchParams();
 
-    useEffect(() => {
-        axios.get<Type[]>('http://localhost:3000/products/filter/type')
-            .then((response) => {
-                // handle success
-                setTypes(response.data)
-            })
-            .catch((error) => {
-                // handle error
-                console.log(error);
-            })
-    }, [])
+    function handleClick(e: React.MouseEvent<HTMLDivElement>, type: string) {
+        if (type == search.get('query')) {
+            e.currentTarget.classList.remove('active');
+            search.delete('query');
+            setSearch(search, {
+                replace: true,
+            });
+        } else {
+            e.currentTarget.classList.add('active');
+            search.set('query', type);
+            setSearch(search, {
+                replace: true,
+            });
+        }
+    }
+
+
     return (
         <div className='cardContainer mt-4'>
             {types?.map((type, i: number) => (
-                <div className="item" key={i}>
-                    <TypesCard  type={type.type} />
+                <div className="item" key={i} onClick={(e) => { handleClick(e, type.type) }}>
+                    <TypesCard type={type.type} />
                 </div>
 
             ))}

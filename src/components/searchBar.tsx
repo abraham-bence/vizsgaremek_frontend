@@ -11,6 +11,7 @@ export default function SearchBar() {
     const text = e.target.value;
 
     if (text.length === 0) {
+
       search.delete('query');
       setSearch(search, {
         replace: true,
@@ -21,6 +22,7 @@ export default function SearchBar() {
         replace: true,
       });
     }
+    console.log(search.get('query'));
   }, 350);
 
   return (

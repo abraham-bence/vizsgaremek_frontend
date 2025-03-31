@@ -1,17 +1,59 @@
 .cardContainer {
     display: flex;
     overflow-x: auto;
+    padding: 10px 0;
   .card{
     margin: 0 10px;
     width: 25vw;
+    transition: 300ms;
 
     .card-img {
         width: 100%;
         aspect-ratio: 16 / 16 ;
         object-fit: cover;
     }
+   
+    &:hover {
+      transform: translateY(-10px);
+    }
+  }
+  .active {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 25vw;
+      height: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(45deg, red, blue, cyan, lime, yellow, orange, red);
+      padding: 75px;
+      border-radius: 6px;
+      z-index: -1;
+      background-size: 400%;
+      animation: borderAnimation 5s linear infinite;
+    }
   }
   &::-webkit-scrollbar{
     width: 0;
   }
+}.animated-border
+
+.animated-border::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  background: #111;
+  border-radius: 8px;
+  z-index: -1;
+}
+
+@keyframes borderAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
