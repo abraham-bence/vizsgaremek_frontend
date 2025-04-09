@@ -1,6 +1,7 @@
 import { Navbar, Container, Nav} from 'react-bootstrap'
 import "../css/navbar.scss"
 import SearchBar from './searchBar'
+import { CgProfile } from 'react-icons/cg'
 
 interface Props {
     className: string
@@ -17,8 +18,8 @@ function NavigationBar({ className }: Props) {
                 </Navbar.Collapse>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <Nav.Link href="/home">Home</Nav.Link>
-                        <Nav.Link href="/products">Products</Nav.Link>
+                        <Nav.Link href="/products" className='link'>Products</Nav.Link>
+                        <Nav.Link href="/profile/login"> <CgProfile className='icon'/> </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

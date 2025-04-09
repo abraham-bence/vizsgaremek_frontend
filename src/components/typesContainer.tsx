@@ -36,7 +36,7 @@ function TypesContainer() {
 
 
     return (
-        <div className='cardContainer mt-4'>
+        <div className='cardContainer'>
             {types?.map((type, i: number) => (
                 <div className="item" key={i} onClick={(e) => { handleClick(e, type.type) }}>
                     <TypesCard type={type.type} />

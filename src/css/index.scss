@@ -1,27 +1,46 @@
-
 body {
-    background-color: #010204;
+    background-color: #1f1f1f;
 }
 
 .hero {
-
     background-image: url(../assets/homeimg.jpeg);
     background-size: cover;
     background-position: top;
+    position: relative; /* Added for z-index to work */
     z-index: -1;
 
     width: 100%;
-    aspect-ratio: 16 / 8;
+    aspect-ratio: 16 / 8; /* Maintains a 16:8 ratio */
+
     .hero-overlay {
         width: 100%;
         height: 100%;
-        background-color: rgba($color: #000000, $alpha: 0.5);
+        background-color: rgba(0, 0, 0, 0.5); /* Replaced SCSS vars with direct CSS values */
         display: flex;
         justify-content: center;
         align-items: center;
         color: white;
     }
 }
+
+.shrink {
+    opacity: 0;
+    width: 0%;
+    animation: shrink 0.5s forwards ;
+}
+
+@keyframes shrink {
+    0% {
+        opacity: 0;
+        width: 100%;
+    }
+    100% {
+        opacity: 0;
+        width: 0%;
+    }
+}
+
+
 
 .productContainer {
     margin: 5px;

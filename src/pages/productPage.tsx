@@ -1,33 +1,41 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import NavigationBar from '../components/navbar';
-import Products, { Product } from '../components/products';
+import Products from '../components/products';
 import Filter from '../components/filter';
 import '../css/productPage.scss';
-import { useProducts } from '../core/hooks';
+import { useSearchParams } from 'react-router-dom';
 
 function ProductPage() {
     const [selectedType, setSelectedTypes] = useState<string>('ALL');
     const [selectedManufacturers, setSelectedManufacturers] = useState<string[]>([]);
-    const [filteredData, setFilteredData] = useState<Product[]>([]);
+    const [search, setSearch] = useSearchParams();
 
-
-    const getProducts = useProducts()
-    const products = useMemo(() => getProducts.data ?? [], [getProducts.data]);
+    // Sync state when searchParams change
+    useEffect(() => {
+        const query = search.get('query');
+        if (!query) {
+            setSelectedTypes('ALL'); // Reset type when query is empty
+        }
+    }, [search]);
 
     // Toggle type selection
     const toggleType = (type: string) => {
         setSelectedTypes((prev) => {
-            if(prev == type) {
-                setSelectedManufacturers([])
-                return 'ALL'
+            const newSearch = new URLSearchParams(search);
+
+            if (prev === type) {
+                setSelectedManufacturers([]);
+                newSearch.delete('query'); // Correct way to remove query
+                setSearch(newSearch, { replace: true });
+                return 'ALL';
+            } else {
+                newSearch.set('query', type);
+                setSearch(newSearch, { replace: true });
+                setSelectedManufacturers([]);
+                return type;
             }
-            else {
-                setSelectedManufacturers([])
-                return type
-            }
-        }
-        );
+        });
     };
 
     // Toggle manufacturer selection
@@ -37,24 +45,11 @@ function ProductPage() {
         );
     };
 
-    // Filter products based on selected types & manufacturers
-    useEffect(() => {
-        let filtered = products;
-
-        if (selectedType != 'ALL') {
-            filtered = filtered.filter((product) => selectedType == product.type);
-        }
-
-        if (selectedManufacturers.length > 0) {
-            filtered = filtered.filter((product) => selectedManufacturers.includes(product.manufacturer));
-        }
-
-        setFilteredData(filtered);
-    }, [selectedType, selectedManufacturers, products]);
-
     return (
         <div>
-            <NavigationBar className='my-navbar-secondary' />
+            <div className="navborder fixed">
+            <NavigationBar className='my-navbar'/>
+            </div>
             <Container className='mt-5'>
                 <Row>
                     <Col sm={2}>
@@ -66,7 +61,7 @@ function ProductPage() {
                         />
                     </Col>
                     <Col sm={10}>
-                        <Products data={filteredData} />
+                        <Products />
                     </Col>
                 </Row>
             </Container>

@@ -3,23 +3,26 @@ import { Col, Row } from 'react-bootstrap';
 import ProductCard from '../components/productCard';
 import { useProducts } from '../core/hooks';
 import { BarLoader } from 'react-spinners';
+import { useMemo } from 'react';
 
 export interface Product {
-    id: number
-    name: string
-    type: string
-    price: number
-    imgSrc: string
-    manufacturer: string
+  id: number
+  name: string
+  type: string
+  price: number
+  imgSrc: string
+  manufacturer: string
 }
 
 interface Props {
-    data : Product[]
+  data: Product[]
 }
 
 
-function Products({data} : Props) {
-    const getProducts = useProducts()
+function Products() {
+  const getProducts = useProducts()
+  const data = useMemo(() => getProducts.data ?? [], [getProducts.data]);
+
 
   if (getProducts.isLoading) {
     return (
@@ -29,20 +32,20 @@ function Products({data} : Props) {
     );
   }
 
-    return (
-        <>
-            {/* <NavigationBar /> */}
-            <Row xs={1} md={4} className="g-4 productContainer">
-                {data?.map((product) => (
-                    <Col key={product.id}>
-                        <ProductCard product={product} />
-                    </Col>
+  return (
+    <>
+      {/* <NavigationBar /> */}
+      <Row xs={1} md={4} className="g-4 productContainer">
+        {data?.map((product) => (
+          <Col key={product.id}>
+            <ProductCard product={product} />
+          </Col>
 
-                ))}
-            </Row>
-        </>
+        ))}
+      </Row>
+    </>
 
-    )
+  )
 }
 
 export default Products

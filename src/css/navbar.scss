@@ -1,47 +1,44 @@
-.my-navbar-primary {
-    // background: linear-gradient(to bottom, rgb(0, 0, 0, 1), rgb(0, 0, 0, 0.3));
-    // background: linear-gradient(90deg, #4a91e248, #FF6B6B);
-    position: fixed !important;
-    width: 100%;
-    .navbar-brand {
-        color: white;
-        position: relative;
+.iconWrapper {
+    display: flex;
+    align-self: center;
+    position: absolute;
+    right: 0;
+    transform: translateX(-50%);
 
-        &:hover {
-            color: rgba(255, 255, 255, 0.548) !important;
-        }
-        &::before{
-            content: "";
-            background-image: url(../assets/logo1.png);
-            background-size:cover;
-            background-repeat: no-repeat;
-            aspect-ratio: 5 / 4;
-
-            position: absolute;
-            width: 50px;
-            z-index: -10;
-            top: 0;
-            left: 0;
-            transform: translate(-120%, 0);
-
-
-        }
-    }
-
-    .nav-link {
-        color: white;
-
-        &:hover {
-            color: rgba(255, 255, 255, 0.548) !important;
-        }
+    .closeIcon:hover {
+        color: red;
+        cursor: pointer;
+        transition: color 0.3s ease;
     }
 }
 
-.my-navbar-secondary {
-    // background: linear-gradient(to bottom, rgb(0, 0, 0, 1), rgb(0, 0, 0, 0.3));
-    background: linear-gradient(90deg, #4a91e248, #FF6B6B);
-    position:static;
+.link {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    width: 2.5vw;
+    height: 2.5vw;
+}
+
+.navborder {
+    z-index: 10;
+    position: fixed;
     width: 100%;
+    top: 0;
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, #4a91e2, #FF6B6B);
+    }
+}
+
+.my-navbar {
+
     .navbar-brand {
         color: white;
         position: relative;
@@ -49,21 +46,19 @@
         &:hover {
             color: rgba(255, 255, 255, 0.548) !important;
         }
-        &::before{
+
+        &::before {
             content: "";
             background-image: url(../assets/logo1.png);
-            background-size:cover;
+            background-size: cover;
             background-repeat: no-repeat;
             aspect-ratio: 5 / 4;
-
             position: absolute;
             width: 50px;
             z-index: -10;
             top: 0;
             left: 0;
             transform: translate(-120%, 0);
-
-
         }
     }
 
@@ -74,4 +69,48 @@
             color: rgba(255, 255, 255, 0.548) !important;
         }
     }
+
+}
+
+
+.search {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+}
+
+.searchInput {
+    width: clamp(100px, 20vw, 400px);
+    height: 40px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    border: none;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.searchInput:focus {
+    border-color: #FF6B6B;
+    /* Focus effect */
+}
+
+
+.fixed {
+    position: sticky !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    /* Ensure the navbar stays above other content */
+    background-color: #1f1f1f
 }
