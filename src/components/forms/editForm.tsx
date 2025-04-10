@@ -11,8 +11,7 @@ interface Props {
 }
 
 interface Errors {
-    name?: string;
-    address?: string;
+    validation?: string
 }
 
 interface User {
@@ -43,10 +42,9 @@ function EditForm() {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
-        setErrors((prev) => ({
-            ...prev,
-            [name]: null,
-        }))
+        setErrors({
+            validation : undefined
+        })
 
         setData((prev) => ({
             ...prev,
@@ -66,8 +64,8 @@ function EditForm() {
                 triggerRefresh()
             })
             .catch((err) => {
-                console.log(err.response.data)
-                // setErrors(err.response.data.errors)
+                console.log(err.response.data.message)
+                setErrors({validation : err.response.data.message})
             })
     }
 
@@ -77,19 +75,19 @@ function EditForm() {
                 <h2>Edit</h2>
                 <Form.Group className="mb-3">
                     <Form.Label>Name - {profile?.username}</Form.Label>
-                    <Form.Control name='name' type="text" onChange={handleChange} value={data?.name ? data.name : ''} placeholder="Enter name" className={errors.name ? "is-invalid" : ""} />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.name}
-                    </Form.Control.Feedback>
+                    <Form.Control name='name' type="text" onChange={handleChange} value={data?.name ? data.name : ''} placeholder="Enter name" />
                 </Form.Group>
 
                 <Form.Group className="mb-3" >
                     <Form.Label>Address - {profile?.address}</Form.Label>
-                    <Form.Control name='address' type="text" onChange={handleChange} value={data?.address ? data.address : ''} placeholder="Enter address" className={errors.address ? "is-invalid" : ""} />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.address}
-                    </Form.Control.Feedback>
+                    <Form.Control name='address' type="text" onChange={handleChange} value={data?.address ? data.address : ''} placeholder="Enter address" />
                 </Form.Group>
+
+                {errors?.validation ? (
+                    <div className="text-danger">
+                        one of the fields should not be empty
+                    </div>
+                ) : null}
 
                 <div className="mb-3 btnGroup" >
                     <Button className='dangerBtn' onClick={() => { navigate('/profile/changePassword'); triggerRefresh() }}>

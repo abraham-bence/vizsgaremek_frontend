@@ -1,8 +1,11 @@
 .formContainer {
     display: flex;
-  justify-content: center; /* horizontal */
-  align-items: center;     /* vertical */
-  height: 90dvh; /* full height of the viewport */
+    justify-content: center;
+    /* horizontal */
+    align-items: center;
+    /* vertical */
+    height: 90dvh;
+    /* full height of the viewport */
 }
 
 @property --angle {
@@ -16,28 +19,27 @@ h2 {
 }
 
 .myForm {
-    width: 35vw;
+    width: clamp(300px, 40vw, 600px);
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-  
 
-    color : #fff;
+
+    color: #fff;
     background-color: #1f1f1f;
     border-radius: 10px;
     padding: 2em;
     margin: 0;
 
-    & > * {
+    &>* {
         margin: 10px 0;
         width: 100%;
     }
 
-    &
-
-    &::after, &::before {
+    & &::after,
+    &::before {
         content: '';
         position: absolute;
         width: 100%;
@@ -48,7 +50,7 @@ h2 {
         z-index: -1;
         border-radius: 10px;
         padding: 3px !important;
-        box-sizing:content-box ;
+        box-sizing: content-box;
         background: linear-gradient(var(--angle), #4a91e2, #FF6B6B);
         animation: 10s linear infinite alternate spin;
     }
@@ -78,7 +80,7 @@ h2 {
         font-size: 16px;
         transition: background-color 0.3s ease, transform 0.3s ease;
         width: 100%;
-    
+
         &:hover {
             background-color: #FF6B6B;
             transform: scale(1.05);
@@ -87,20 +89,21 @@ h2 {
 
     .activeBtn {
         background-color: #4a91e2;
+
         &:hover {
             background-color: #4a91e2;
         }
     }
-    
-    .dangerBtn{
+
+    .dangerBtn {
         background-color: #1f1f1f;
         border: 3px solid #CC4C4C;
-    
+
         &:hover {
             background-color: #CC4C4C;
             border: 3px solid #CC4C4C;
         }
-        
+
     }
 }
 
@@ -108,6 +111,7 @@ h2 {
     from {
         --angle: 0deg;
     }
+
     to {
         --angle: 360deg;
     }

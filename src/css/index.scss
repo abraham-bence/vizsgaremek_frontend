@@ -1,47 +1,113 @@
 body {
     background-color: #1f1f1f;
-}
-
-.hero {
+  }
+  
+  .hero {
     background-image: url(../assets/homeimg.jpeg);
     background-size: cover;
     background-position: top;
-    position: relative; /* Added for z-index to work */
+    position: relative;
     z-index: -1;
-
     width: 100%;
-    aspect-ratio: 16 / 8; /* Maintains a 16:8 ratio */
-
+    aspect-ratio: 16 / 8;
+  
     .hero-overlay {
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Replaced SCSS vars with direct CSS values */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+  
+      h1, p {
+        margin: 0;
+        padding: 0 1rem;
+      }
     }
-}
-
-.shrink {
+  }
+  
+  .shrink {
     opacity: 0;
     width: 0%;
-    animation: shrink 0.5s forwards ;
-}
-
-@keyframes shrink {
+    animation: shrink 0.5s forwards;
+  }
+  
+  @keyframes shrink {
     0% {
-        opacity: 0;
-        width: 100%;
+      opacity: 0;
+      width: 100%;
     }
+  
     100% {
-        opacity: 0;
-        width: 0%;
+      opacity: 0;
+      width: 0%;
     }
-}
+  }
+  
+  .productContainer {
+    margin: 1rem;
+  
+    .product-card {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      border: none;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+      &:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 10px rgba(74, 145, 226, 0.3);
+      }
+  
+      .card-img-top {
+        aspect-ratio: 1 / 1;
+        object-fit:contain;
+        padding: 10px;
+      }
+  
+      .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+  
+        
+      }
 
-
-
-.productContainer {
-    margin: 5px;
-}
+      .card-footer {
+        .btn-container {
+          display: flex;
+          justify-content: space-between;
+          gap: 10px;
+          margin-top: auto;
+        }
+  
+        .btn {
+          padding: 0;
+          background: none;
+          border: none;
+          transition: transform 0.2s ease;
+  
+          &:hover {
+            transform: scale(1.1);
+          }
+  
+          .icon {
+            color: #4a91e2;
+            width: 2rem;
+            height: 2rem;
+          }
+  
+          .heart {
+            color: red;
+          }
+        }
+      }
+    }
+  }
+  

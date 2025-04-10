@@ -15,22 +15,37 @@ import EditForm from './components/forms/editForm'
 import Profile from './components/profile'
 import ChangePasswordForm from './components/forms/changePasswordForm'
 import DeleteForm from './components/forms/deleteForm'
+import Cart from './components/cart'
+import Favorites from './components/favorites'
+import ProductDetails from './components/productDetails'
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '',
     element: <HomePage />
   },
   {
-    path: '/home',
+    path: 'home',
     element: <HomePage />
   },
   {
-    path: '/products',
-    element: <ProductPage />
+    path: 'products',
+    element: <ProductPage />,
   },
   {
-    path: '/profile',
+    path : 'products/:id',
+    element: <ProductDetails/>
+  },
+  {
+    path: 'cart',
+    element: <Cart/>
+  },
+  {
+    path: 'favorites',
+    element: <Favorites/>
+  },
+  {
+    path: 'profile',
     element: <ProfilePage/>,
     children : [
       {
