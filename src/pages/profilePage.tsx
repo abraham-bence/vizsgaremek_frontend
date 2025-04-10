@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react'
 import NavigationBar from '../components/navbar'
-import LoginForm from '../components/loginForm'
 import '../css/form.scss'
-import RegisterForm from '../components/registerForm'
-import Profile from '../components/profile'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 export interface LayoutContextType {
   triggerRefresh: () => void;
 }
 
 function ProfilePage() {
+  const navigate = useNavigate()
+
   const [refreshKey, setRefreshKey] = useState(0);
 
   const triggerRefresh = () => setRefreshKey(prev => prev + 1);
+
+  useEffect(() => {
+    if(localStorage.getItem('token')) {
+      navigate('profile/myProfile')
+    }
+  }, [])
 
   return (
     <div>
@@ -21,7 +26,6 @@ function ProfilePage() {
         <NavigationBar className={`my-navbar `} />
       </div>
 
-      {localStorage.getItem('token') ? (<Profile triggerRefresh={triggerRefresh} />) : null}
 
       <Outlet context={{ triggerRefresh }}/>
     </div>

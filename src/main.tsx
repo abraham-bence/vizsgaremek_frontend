@@ -9,8 +9,12 @@ import { queryClient } from './core/api'
 import ProfilePage from './pages/profilePage'
 import HomePage from './pages/home'
 import path from 'path'
-import RegisterForm from './components/registerForm'
-import LoginForm from './components/loginForm'
+import RegisterForm from './components/forms/registerForm'
+import LoginForm from './components/forms/loginForm'
+import EditForm from './components/forms/editForm'
+import Profile from './components/profile'
+import ChangePasswordForm from './components/forms/changePasswordForm'
+import DeleteForm from './components/forms/deleteForm'
 
 const router = createBrowserRouter([
   {
@@ -36,6 +40,22 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <LoginForm/>
+      },
+      {
+        path: 'edit',
+        element: <EditForm/>
+      },
+      {
+        path: 'myProfile',
+        element: <Profile/>
+      },
+      {
+        path: 'changePassword',
+        element: <ChangePasswordForm/>
+      }, 
+      {
+        path: 'delete',
+        element : <DeleteForm/>
       }
     ]
   }

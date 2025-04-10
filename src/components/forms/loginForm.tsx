@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Button, Form, FormGroup, InputGroup } from 'react-bootstrap'
-import { apiClient } from '../core/api';
 import { useNavigate, useNavigation, useOutletContext } from 'react-router-dom';
-import { LayoutContextType } from '../pages/profilePage';
+import { LayoutContextType } from '../../pages/profilePage';
+import { apiClient } from '../../core/api';
+import { FaRegEye } from 'react-icons/fa';
+import { TbEyeOff } from 'react-icons/tb';
 
 interface Errors {
     email?: string;
@@ -16,7 +18,7 @@ function LoginForm() {
 
     const navigate = useNavigate()
     const { triggerRefresh } = useOutletContext<LayoutContextType>();
-    
+
     const [data, setData] = useState({
         email: '',
         password: ''
@@ -24,12 +26,18 @@ function LoginForm() {
 
     const [errors, setErrors] = useState<Errors>()
 
+    const [showPassword, setShowPassword] = useState(false)
+
+    const togglePassword = () => {
+        setShowPassword((prev) => !prev)
+    }
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
         setErrors((prev) => ({
             ...prev,
             [name]: null,
-            auth:false
+            auth: false
         }))
 
         setData((prev) => ({
@@ -44,12 +52,12 @@ function LoginForm() {
             .then(res => {
                 console.log(res.data)
                 // Handle successful login here, e.g., store the token in local storage
-                navigate('/profile')
+                navigate('/profile/myProfile')
                 triggerRefresh()
                 localStorage.setItem('token', res.data.access_token)
             })
             .catch(err => {
-                setErrors(!err.response.data.errors? {auth : true} : err.response.data.errors )
+                setErrors(!err.response.data.errors ? { auth: true } : err.response.data.errors)
             })
     }
 
@@ -67,11 +75,22 @@ function LoginForm() {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control name='password' type="password" onChange={handleChange} value={data.password} placeholder="Password" className={errors?.password ? "is-invalid" : ""} />
-                    <Form.Control.Feedback type="invalid">
+                    <InputGroup hasValidation>
+                        <Form.Control name='password' type={showPassword ? 'text' : 'password'} onChange={handleChange} value={data.password} placeholder="Password" className={errors?.password ? "is-invalid" : ""} />
+                        <Button
+                            variant="outline-secondary"
+                            onClick={togglePassword}
+                            type="button"
+                        >
+                            {showPassword ? <FaRegEye /> : <TbEyeOff />}
+                        </Button>
+                        <Form.Control.Feedback type="invalid">
                         {errors?.password}
-                    </Form.Control.Feedback>
+                    </Form.Control.Feedback> 
+                    </InputGroup>
+                                    
                 </Form.Group>
+
 
                 {errors?.auth ? (
                     <div className="text-danger">
@@ -85,7 +104,7 @@ function LoginForm() {
                     <Button className='activeBtn' type="submit">
                         Login
                     </Button>
-                    <Button onClick={() => {navigate('/profile/register'); triggerRefresh()  }} className='ml-2'>
+                    <Button onClick={() => { navigate('/profile/register'); triggerRefresh() }} className='ml-2'>
                         Register
                     </Button>
                 </Form.Group>

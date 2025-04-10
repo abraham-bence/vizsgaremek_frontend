@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Form, OverlayTrigger, Tooltip } from 'react-bootstrap'
-import { apiClient } from '../core/api';
+import { apiClient } from '../../core/api';
 import { useNavigate, useOutletContext } from 'react-router-dom';
-import { LayoutContextType } from '../pages/profilePage';
+import { LayoutContextType } from '../../pages/profilePage';
 
 interface Props {
     changeState: () => void;
@@ -59,7 +59,7 @@ function RegisterForm() {
                         })
                         localStorage.setItem('token', res.data.access_token)
                         
-                        navigate('/profile')
+                        navigate('/profile/myProfile')
                         triggerRefresh()
                     })
                     .catch((err) => {

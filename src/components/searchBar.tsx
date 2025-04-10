@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
-import { RiSearch2Line } from "react-icons/ri";
 import { useSearchParams } from "react-router-dom";
 import { debounce } from "lodash";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { RiSearch2Line } from "react-icons/ri";
 
 export default function SearchBar() {
   const [search, setSearch] = useSearchParams();

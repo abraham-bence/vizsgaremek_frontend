@@ -1,34 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { apiClient } from '../core/api'
 import { Button } from 'react-bootstrap'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import { LayoutContextType } from '../pages/profilePage'
 
 interface Profile {
-    username : string 
-    email : string
-    address : string
+    username: string
+    email: string
+    address: string
 }
 
-interface Props {
-    triggerRefresh : () => void
-}
 
-function Profile({triggerRefresh} : Props)  {
+
+function Profile() {
     const navigate = useNavigate()
+    const { triggerRefresh } = useOutletContext<LayoutContextType>();
 
 
-    const [profile , setProfile] = useState<Profile>()
+    const [profile, setProfile] = useState<Profile>()
 
     useEffect(() => {
-        apiClient.get('/auth/profile', {headers : {Authorization : `Bearer ${localStorage.getItem('token')}`}})
-        .then((res) => {
+        apiClient.get('/auth/profile', { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
+            .then((res) => {
                 setProfile(res.data)
-        } )
-        .catch((err) => {
-            console.log('igen')
-            console.log(err)
-        })
+            })
+            .catch((err) => {
+                console.log('igen')
+                console.log(err)
+            })
     }, [])
 
     const handleLogout = () => {
@@ -38,8 +37,8 @@ function Profile({triggerRefresh} : Props)  {
     }
 
 
-  return (
-    <div className='formContainer'>
+    return (
+        <div className='formContainer'>
             <div className='myForm'>
                 <h2>Profile</h2>
                 <div className='mb-3'>
@@ -49,9 +48,10 @@ function Profile({triggerRefresh} : Props)  {
 
                 </div>
                 <div className="mb-3 btnGroup" >
-                    <Button className='activeBtn' type="submit">
+                    <Button onClick={() => { navigate('/profile/edit'); triggerRefresh() }} className='activeBtn' type="submit">
                         Edit
                     </Button>
+                    
                     <Button onClick={handleLogout} className='ml-2'>
                         Logout
                     </Button>
@@ -59,7 +59,7 @@ function Profile({triggerRefresh} : Props)  {
             </div>
         </div>
 
-  )
+    )
 }
 
 export default Profile

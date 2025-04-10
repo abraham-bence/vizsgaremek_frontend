@@ -58,35 +58,50 @@ h2 {
     }
 }
 
-.btn {
-    background-color: #FF6B6B;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    width: 100%;
 
-    &:hover {
-        background-color: #FF6B6B;
-        transform: scale(1.05);
-    }
-}
 
-.activeBtn {
-    background-color: #4a91e2;
-    &:hover {
-        background-color: #4a91e2;
-    }
-}
+
 
 .btnGroup {
     display: flex;
     justify-content: space-between;
     gap: 20px;
     width: 100%;
+
+    .btn {
+        background-color: #FF6B6B;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        width: 100%;
+    
+        &:hover {
+            background-color: #FF6B6B;
+            transform: scale(1.05);
+        }
+    }
+
+    .activeBtn {
+        background-color: #4a91e2;
+        &:hover {
+            background-color: #4a91e2;
+        }
+    }
+    
+    .dangerBtn{
+        background-color: #1f1f1f;
+        border: 3px solid #CC4C4C;
+    
+        &:hover {
+            background-color: #CC4C4C;
+            border: 3px solid #CC4C4C;
+        }
+        
+    }
 }
 
 @keyframes spin {
