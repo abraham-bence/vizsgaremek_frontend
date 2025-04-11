@@ -36,32 +36,33 @@ function ProductDetails() {
             </div>
             <Container className="product-details-container">
                 <Row className="product-details">
-                    <Col md={6}>
-                        <Card>
-                            <Card.Img
-                                variant="top"
-                                src={`http://localhost:3000/uploads/${product.imgSrc}`}
-                                alt={product.name}
-                            />
-                        </Card>
+                    <Col>
+                        <Card.Img
+                            variant="top"
+                            src={`http://localhost:3000/uploads/${product.imgSrc}`}
+                            alt={product.name}
+                        />
                     </Col>
-                    <Col md={6}>
-                        <Card.Body>
-                            <Card.Title>{product.name}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">{product.manufacturer}</Card.Subtitle>
-                            <Card.Text className="product-price">
-                                <strong>{product.price} USD</strong>
-                            </Card.Text>
-                            <Card.Text>{product.manufacturer}</Card.Text>
-                            <div className="action-buttons">
-                                <Button variant="primary" size="lg">
-                                    Add to Cart
-                                </Button>
-                                <Button variant="outline-danger" size="lg">
-                                    Add to Wishlist
-                                </Button>
-                            </div>
-                        </Card.Body>
+                    <Col >
+                        <Card.Title>{product.name}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">{product.manufacturer}</Card.Subtitle>
+                        <Card.Text className="product-price">
+                            <strong>{product.price} USD</strong>
+                        </Card.Text>
+                        <Card.Text>{product.manufacturer}</Card.Text>
+                        <div className="action-buttons">
+                            <Button variant="primary" size="lg">
+                                Add to Cart
+                            </Button>
+                            <Button variant="outline-danger" size="lg">
+                                Add to Wishlist
+                            </Button>
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col >
+                        details
                     </Col>
                 </Row>
             </Container>

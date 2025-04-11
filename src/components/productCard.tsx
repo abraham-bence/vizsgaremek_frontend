@@ -47,8 +47,8 @@ function ProductCard({ product, main, onAdd, onLike }: Props) {
 
     return (
         <Card className='product-card' >
-            <Card.Img variant="top" src={'http://localhost:3000/uploads/' + product.imgSrc} />
-            <Card.Body onClick={handleNavigation}>
+            <Card.Img onClick={handleNavigation} style={{cursor : 'pointer'}} variant="top" src={'http://localhost:3000/uploads/' + product.imgSrc} />
+            <Card.Body onClick={handleNavigation} style={{cursor : 'pointer'}}>
                 <Card.Title>{product.name}</Card.Title>
                 <Card.Text>
                     {product.price}

@@ -12,7 +12,7 @@ export function useProducts(): UseQueryResult<Product[]> {
             apiClient
                 .get('/products/search', {
                     params: {
-                        search: search
+                        search: search.get('query')
                     }
                 })
                 .then(res => res.data),

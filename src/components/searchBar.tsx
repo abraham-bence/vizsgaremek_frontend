@@ -10,9 +10,10 @@ export default function SearchBar() {
 
   useEffect(() => {
     setInputValue(search.get("query") ?? ""); // Sync state with URL
+    console.log(search.get('query'))
   }, [search]);
 
-  // Debounce only the URL update, not the input state
+  // Debounce the URL update
   const updateSearchParams = useCallback(
     debounce((text) => {
       if (text.length === 0) {
@@ -26,14 +27,14 @@ export default function SearchBar() {
   );
 
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const text = e.target.value;
+    const text = e.target.value; 
     setInputValue(text); // Update input field immediately
     updateSearchParams(text); // Debounced URL update
   };
 
   function handleClose() {
     setInputValue(""); // Clear input field
-    search.delete("query");
+    search.delete("query"); //Clear search
     setSearch(search, { replace: true });
   }
 
