@@ -18,6 +18,8 @@ import DeleteForm from './components/forms/deleteForm'
 import Cart from './components/cart'
 import Favorites from './components/favorites'
 import ProductDetails from './components/productDetails'
+import Checkout from './pages/checkoutPage'
+import ThankYou from './pages/thankyouPage'
 
 const router = createBrowserRouter([
   {
@@ -73,6 +75,14 @@ const router = createBrowserRouter([
         element : <DeleteForm/>
       }
     ]
+  },
+  {
+    path: 'checkout',
+    element: <Checkout/>
+  },
+  {
+    path: 'thank-you',
+    element: <ThankYou/>
   }
 ])
 

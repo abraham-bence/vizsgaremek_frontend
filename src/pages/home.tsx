@@ -10,8 +10,9 @@ function HomePage() {
   return (
     <div>
       <div className="navborder fixed">
-      <NavigationBar className={`my-navbar `} />
+        <NavigationBar className={`my-navbar `} />
       </div>
+      <div className='homeContainer'>
 
         <div className="hero">
           <div className="hero-overlay">
@@ -21,7 +22,10 @@ function HomePage() {
 
         <TypesContainer />
 
-      <Products />
+        <div className='mx-3'>
+          <Products />
+        </div>
+      </div>
       <Footer />
     </div>
   );

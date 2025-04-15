@@ -7,9 +7,10 @@ import { FaRegHeart } from 'react-icons/fa'
 
 interface Props {
     className: string
+    resetFilters? : () => void
 }
 
-function NavigationBar({ className }: Props) {
+function NavigationBar({ className, resetFilters }: Props) {
     return (
         <Navbar className={className} expand="lg">
             <Container>
@@ -24,7 +25,7 @@ function NavigationBar({ className }: Props) {
                     </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <SearchBar />
+                    <SearchBar resetFilters={resetFilters}/>
                 </Navbar.Collapse>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">

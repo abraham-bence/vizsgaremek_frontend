@@ -1,6 +1,18 @@
 .filter {
     background-color: white;
     border-radius: 3px;
-    min-height: 85vh;
-    padding: 5px;
+    padding: 10px;
 }
+.productCell {
+  min-height: 80dvh !important;
+}
+.price-slider {
+    margin-bottom: 20px;
+  
+    .price-values {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+  }

@@ -19,10 +19,8 @@ export default function Footer() {
           <Col md={4} className="mb-3">
             <h5>Quick Links</h5>
             <ul className="list-unstyled">
-              <li><a href="#" className="text-light text-decoration-none">Home</a></li>
-              <li><a href="#" className="text-light text-decoration-none">Shop</a></li>
-              <li><a href="#" className="text-light text-decoration-none">About Us</a></li>
-              <li><a href="#" className="text-light text-decoration-none">Contact</a></li>
+              <li><a href="/" className="text-light text-decoration-none">Home</a></li>
+              <li><a href="/products" className="text-light text-decoration-none">Shop</a></li>
             </ul>
           </Col>
 
@@ -30,10 +28,10 @@ export default function Footer() {
           <Col md={4} className="mb-3 text-md-end">
             <h5>Follow Us</h5>
             <div className="d-flex justify-content-center justify-content-md-end gap-3 mt-2">
-              <a href="#" className="text-light fs-5"><FaFacebookF /></a>
-              <a href="#" className="text-light fs-5"><FaTwitter /></a>
-              <a href="#" className="text-light fs-5"><FaInstagram /></a>
-              <a href="#" className="text-light fs-5"><FaGithub /></a>
+              <a href="https://www.facebook.com/" className="text-light fs-5"><FaFacebookF /></a>
+              <a href="https://x.com/" className="text-light fs-5"><FaTwitter /></a>
+              <a href="https://www.instagram.com/" className="text-light fs-5"><FaInstagram /></a>
+              <a href="https://github.com/abraham-bence" className="text-light fs-5"><FaGithub /></a>
             </div>
           </Col>
 

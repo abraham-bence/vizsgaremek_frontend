@@ -5,7 +5,7 @@ export interface Product {
     manufacturer: string;
     type: string;
     price: number;
-    couantity: number;
+    quantity: number;
     imgSrc: string;
     Processor?: Processor;
     Memory?: Memory;

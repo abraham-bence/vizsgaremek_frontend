@@ -5,14 +5,14 @@ import { useSearchParams } from "react-router-dom";
 
 export function useProducts(): UseQueryResult<Product[]> {
     const [search] = useSearchParams()
-
-    return useQuery({
+    return useQuery(
+        {
         queryKey: ['products', search.toString()],
         queryFn: () =>
             apiClient
                 .get('/products/search', {
                     params: {
-                        search: search.get('query')
+                        search: search.get('query'),
                     }
                 })
                 .then(res => res.data),

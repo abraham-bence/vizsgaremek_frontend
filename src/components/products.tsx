@@ -1,4 +1,3 @@
-
 import { Col, Row } from 'react-bootstrap';
 import ProductCard from '../components/productCard';
 import { useProducts } from '../core/hooks';
@@ -6,26 +5,24 @@ import { BarLoader } from 'react-spinners';
 import { useEffect, useMemo, useState } from 'react';
 
 export interface Product {
-  id: number
-  name: string
-  type: string
-  price: number
-  imgSrc: string
-  manufacturer: string
+  id: number;
+  name: string;
+  type: string;
+  price: number;
+  imgSrc: string;
+  manufacturer: string;
+  quantity: number;
 }
-
-interface Props {
-  data: Product[]
-}
-
 
 function Products() {
-  const getProducts = useProducts()
+  const getProducts = useProducts();
   const data = useMemo(() => getProducts.data ?? [], [getProducts.data]);
-
 
   const [cart, setCart] = useState<Product[]>([]);
   const [cartLoaded, setCartLoaded] = useState(false);
+
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [snackbarText, setSnackbarText] = useState('');
 
   const [likes, setLikes] = useState<Product[]>([]);
   const [likesLoaded, setLikesLoaded] = useState(false);
@@ -46,9 +43,24 @@ function Products() {
 
   const handleCartAdd = (product: Product) => {
     setCart((prev) => {
-      const exists = prev.find((p) => p.id === product.id);
-      if (exists) return prev;
-      return [...prev, product];
+      const existingProductIndex = prev.findIndex((p) => p.id === product.id);
+      if (existingProductIndex !== -1) {
+        // If product is already in the cart, increment the quantity
+        const updatedCart = [...prev];
+        updatedCart[existingProductIndex] = {
+          ...updatedCart[existingProductIndex],
+          quantity: updatedCart[existingProductIndex].quantity + 1,
+        };
+        setSnackbarText(`"${product.name}" added to cart 😄`);
+        setShowSnackbar(true);
+        setTimeout(() => setShowSnackbar(false), 3000); // auto-hide in 3s
+        return updatedCart;
+      }
+      setSnackbarText(`"${product.name}" added to cart 😄`);
+      setShowSnackbar(true);
+      setTimeout(() => setShowSnackbar(false), 3000); // auto-hide in 3s
+      // If product is not in the cart, add it with quantity 1
+      return [...prev, { ...product, quantity: 1 }];
     });
   };
 
@@ -69,7 +81,11 @@ function Products() {
   const handleLike = (product: Product) => {
     setLikes((prev) => {
       const exists = prev.find((p) => p.id === product.id);
-      if (exists) return prev;
+      if (exists) {
+        // If product is already liked, remove it from likes
+        return prev.filter((p) => p.id !== product.id);
+      }
+      // If product isn't liked, add it to likes and trigger refresh
       return [...prev, product];
     });
   };
@@ -84,18 +100,26 @@ function Products() {
 
   return (
     <>
-      {/* <NavigationBar /> */}
       <Row xs={1} md={2} lg={3} xxl={4} className="g-4 productContainer">
         {data?.map((product) => (
           <Col key={product.id}>
-            <ProductCard product={product} main={true} onAdd={handleCartAdd} onLike={handleLike} />
+            <ProductCard
+              product={product}
+              main={true}
+              onAdd={handleCartAdd}
+              onLike={handleLike}
+              isLiked={!!likes.find((p) => p.id === product.id)}
+            />
           </Col>
-
         ))}
       </Row>
+      {showSnackbar && (
+        <div className="snackbar">
+          {snackbarText}
+        </div>
+      )}
     </>
-
-  )
+  );
 }
 
-export default Products
+export default Products;

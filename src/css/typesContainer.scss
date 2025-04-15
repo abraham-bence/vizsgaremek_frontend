@@ -1,23 +1,26 @@
 .cardContainer {
-    display: flex;
-    overflow-x: auto;
-    padding: 10px 0;
-  .card{
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth; // 💫 this is the magic line
+  padding: 10px 0;
+
+  .card {
     margin: 0 10px;
-    width: 15vw;
+    width: clamp(200px, 15vw, 300px);
     transition: 300ms;
 
     .card-img {
-        width: 100%;
-        aspect-ratio: 16 / 16 ;
-        object-fit: cover;
+      width: 100%;
+      aspect-ratio: 16 / 16;
+      object-fit: cover;
     }
-   
+
     &:hover {
       transform: translateY(-10px);
     }
   }
-  &::-webkit-scrollbar{
+
+  &::-webkit-scrollbar {
     width: 0;
   }
 }

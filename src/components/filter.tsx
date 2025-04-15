@@ -1,37 +1,44 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import axios from 'axios';
 import { useProducts, useProperties, usePropertiesWhere } from '../core/hooks';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
+import _ from 'lodash';
 
 interface Manufacturer { manufacturer: string }
 interface Type { type: string }
 
 interface FilterProps {
+  setSearch: (value: URLSearchParams, opts?: { replace?: boolean }) => void;
+  searchParams: URLSearchParams;
   selectedType: string;
   selectedManufacturers: string[];
   toggleType: (type: string) => void;
   toggleManufacturer: (manufacturer: string) => void;
+  priceRange : [number, number]
+  handlePriceFilter : (newRange: [number, number]) => void
+  resetFilters : () => void
 }
 
-function Filter({ selectedType, selectedManufacturers, toggleType, toggleManufacturer }: FilterProps) {
+function Filter({ selectedType, selectedManufacturers, toggleType, toggleManufacturer, 
+  priceRange, handlePriceFilter, resetFilters }: FilterProps) {
   const [filteredManufacturers, setFilteredManufacturers] = useState<Manufacturer[]>([]);
   const getProducts = useProducts()
-  const products = useMemo(() => getProducts.data ?? [], [getProducts.data]);
 
-
-  const getTypes = useProperties('type')
+  const getTypes = useProperties('type');
   const types: Type[] = useMemo(() => getTypes.data ?? [], [getTypes.data]);
-  const getManufaturers = useProperties('manufacturer')
+  const getManufaturers = useProperties('manufacturer');
   const manufacturers: Manufacturer[] = useMemo(() => getManufaturers.data ?? [], [getManufaturers.data]);
+
 
 
   const getFilteredManufacturers = () => {
     axios.get('http://localhost:3000/products/filter/manufacturer/' + selectedType)
       .then((res) => {
-        setFilteredManufacturers(res.data)
-      })
-  }
+        setFilteredManufacturers(res.data);
+      });
+  };
 
-  // Filter manufacturers based on selected product types
   useEffect(() => {
     if (selectedType === 'ALL') {
       setFilteredManufacturers(manufacturers);
@@ -39,6 +46,8 @@ function Filter({ selectedType, selectedManufacturers, toggleType, toggleManufac
       getFilteredManufacturers();
     }
   }, [selectedType, manufacturers]);
+
+
 
   return (
     <div className="filter">
@@ -69,12 +78,24 @@ function Filter({ selectedType, selectedManufacturers, toggleType, toggleManufac
         </div>
       ))}
 
-      
+      <h4>Filter by Price</h4>
+      <div className="price-slider">
+        <Slider
+          range
+          min={0}
+          max={1000}
+          step={10}
+          value={priceRange}
+          onChange={(value) => handlePriceFilter(value as [number, number])}
+        />
+        <div className="price-values">
+          <span>{priceRange[0]} $</span>
+          <span>{priceRange[1]} $</span>
+        </div>
+      </div>
 
-
-
+      <button onClick={resetFilters} className="reset-filters-btn">Reset Filters</button>
     </div>
-
   );
 }
 

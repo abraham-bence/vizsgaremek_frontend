@@ -4,7 +4,11 @@ import { debounce } from "lodash";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { RiSearch2Line } from "react-icons/ri";
 
-export default function SearchBar() {
+interface Props {
+  resetFilters?: () => void
+}
+
+export default function SearchBar({resetFilters} : Props) {
   const [search, setSearch] = useSearchParams();
   const [inputValue, setInputValue] = useState(search.get("query") ?? "");
 
@@ -27,15 +31,14 @@ export default function SearchBar() {
   );
 
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const text = e.target.value; 
+    const text = e.target.value;
     setInputValue(text); // Update input field immediately
     updateSearchParams(text); // Debounced URL update
   };
 
   function handleClose() {
     setInputValue(""); // Clear input field
-    search.delete("query"); //Clear search
-    setSearch(search, { replace: true });
+    resetFilters?.()
   }
 
   return (
