@@ -116,3 +116,18 @@ h2 {
         --angle: 360deg;
     }
 }
+
+.orderItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin:10px 0px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: #4a91e2;
+        color: #fff;
+    }
+}

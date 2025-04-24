@@ -1,0 +1,27 @@
+@import "mixins.scss";
+
+.details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 500px;
+    margin: auto;
+    @include sm {
+        flex-direction: row;
+    }
+}
+
+.btnConatiner {
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+}
+
+.deleteBtn {
+    background-color: red;
+    border : none;
+
+    &:hover {
+        background-color: darkred;
+    }
+}

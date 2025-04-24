@@ -90,6 +90,7 @@ function Cart() {
                                         onRemove={handleRemoveFromCart}
                                         onLike={handleLikeToggle}
                                         isLiked={likedProducts.some((p) => p.id === product.id)}
+                                        main
                                     />
                                 </Col>
                             ))}

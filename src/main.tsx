@@ -20,6 +20,7 @@ import Favorites from './components/favorites'
 import ProductDetails from './components/productDetails'
 import Checkout from './pages/checkoutPage'
 import ThankYou from './pages/thankyouPage'
+import OrderDetails from './components/orderDetails'
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: 'delete',
         element : <DeleteForm/>
+      },
+      {
+        path: 'order/:id',
+        element: <OrderDetails/>
       }
     ]
   },

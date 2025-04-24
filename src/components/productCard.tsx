@@ -11,7 +11,7 @@ interface Props {
   onAdd?: (product: Product) => void
   onLike?: (product: Product) => void
   isLiked?: boolean;
-  onRemove? : (product: Product) => void
+  onRemove?: (product: Product) => void
 }
 
 function ProductCard({ product, main, onAdd, onLike, isLiked, onRemove }: Props) {
@@ -34,28 +34,25 @@ function ProductCard({ product, main, onAdd, onLike, isLiked, onRemove }: Props)
         <Card.Text>{product.price}</Card.Text>
         {product.quantity && <Card.Text>Quantity: {product.quantity}</Card.Text>}
       </Card.Body>
-      <Card.Footer>
-        {main ? (
-          <div className='btn-container'>
-            <Button onClick={() => onLike?.(product)}>
-              {isLiked ? <FaHeart className='icon heart' /> : <FaRegHeart className='icon heart' />}
-            </Button>
-            <Button onClick={() => onAdd?.(product)}>
-              <MdOutlineAddShoppingCart className='icon' />
-            </Button>
-          </div>
-        ) : (
-          <div className='btn-container'>
-            <Button onClick={() => onLike?.(product)}>
-              {isLiked ? <FaHeart className='icon heart' /> : <FaRegHeart className='icon heart' />}
-            </Button>
-            <Button onClick={() => onRemove?.(product)}>
-            <MdOutlineRemoveShoppingCart className='icon' />
+      {main ? (
+        <Card.Footer>
 
+          <div className='btn-container'>
+            <Button onClick={() => onLike?.(product)}>
+              {isLiked ? <FaHeart className='icon heart' /> : <FaRegHeart className='icon heart' />}
             </Button>
+            {!onRemove ? (
+              <Button onClick={() => onAdd?.(product)}>
+                <MdOutlineAddShoppingCart className='icon' />
+              </Button>
+            ) : (
+              <Button onClick={() => onRemove?.(product)}>
+                <MdOutlineRemoveShoppingCart className='icon' />
+              </Button>
+            )}
           </div>
-        )}
-      </Card.Footer>
+        </Card.Footer>
+      ) : null}
     </Card>
   );
 }
