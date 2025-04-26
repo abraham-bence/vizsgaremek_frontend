@@ -97,7 +97,7 @@ function Checkout() {
 
   return (
     <div>
-      <NavigationBar className={`my-navbar`} />
+      <NavigationBar/>
       <div className='formContainer'>
         {cart.length > 0 ? (
           <div className='myForm' >

@@ -116,7 +116,7 @@ function ProductPage() {
     return (
         <div>
             <div className="navborder fixed">
-                <NavigationBar className='my-navbar' resetFilters={resetFilters} />
+                <NavigationBar resetFilters={resetFilters} />
             </div>
             <Container className='mt-5'>
                 <Row>

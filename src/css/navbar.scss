@@ -30,6 +30,12 @@
 }
 
 
+// .show {
+//   display: flex;
+//   flex-direction: row;
+// }
+
+
 
 .my-navbar {
     background-color: #1f1f1f;
@@ -79,7 +85,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 10;
+    margin-top: 5px;
 }
 
 input[type="search"]::-webkit-search-decoration,
@@ -104,6 +110,8 @@ input[type="search"]::-webkit-search-results-decoration {
     border-color: #FF6B6B;
     /* Focus effect */
 }
+
+
 
 
 .fixed {

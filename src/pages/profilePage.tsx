@@ -34,7 +34,7 @@ function ProfilePage() {
   return (
     <div>
       <div className="navborder fixed">
-        <NavigationBar className={`my-navbar `} />
+        <NavigationBar/>
       </div>
 
 

@@ -10,7 +10,7 @@ function HomePage() {
   return (
     <div>
       <div className="navborder fixed">
-        <NavigationBar className={`my-navbar `} />
+        <NavigationBar/>
       </div>
       <div className='homeContainer'>
 
