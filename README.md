@@ -25,9 +25,14 @@ Ez egy **React + TypeScript** alapú webalkalmazás, amely **SCSS**-t használ s
    ```bash
     npm install
    ```
+3. **Fejlesztői szerver indítása:**
    ```bash
     npm run dev
     ```
-npm run build
-npm run preview
 
+## Fejlesztési irányelvek
+- Minden új komponens a components/ mappába kerüljön.
+- Oldalak a pages/ mappába szervezve.
+- API hívások a services/ mappában legyenek.
+- Globális stílusokat a styles/ mappában tároljuk.
+- Új logikai funkciókat a hooks/ vagy utils/ mappába helyezzünk.
