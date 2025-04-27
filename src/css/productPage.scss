@@ -1,18 +1,38 @@
 .filter {
-    background-color: white;
-    border-radius: 3px;
-    padding: 10px;
+  background-color: white;
+  border-radius: 3px;
+  padding: 10px;
 }
+
+.reset-filters-btn {
+  background-color: #4a91e2;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 100%;
+
+  &:hover {
+    background-color: #4a91e2;
+    transform: scale(1.05);
+
+  }
+}
+
 .productCell {
   min-height: 80dvh !important;
 }
+
 .price-slider {
-    margin-bottom: 20px;
-  
-    .price-values {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.9rem;
-      margin-top: 4px;
-    }
+  margin-bottom: 20px;
+
+  .price-values {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-top: 4px;
   }
+}

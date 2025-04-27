@@ -22,16 +22,27 @@ function OrderDetails() {
     const [error, setError] = useState("")
 
     useEffect(() => {
-        apiClient.get('/order/' + id, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
-            .then((res) => {
-                setCart(res.data.products)
-                setOrder(res.data)
-            })
-            .catch((err) => {
-                console.log(err)
-                setError('No orders found')
-            })
-    }, [])
+        const fetchOrderDetails = async () => {
+            try {
+                const res = await apiClient.get('/order/' + id, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+                const products: Product[] = [];
+                for (let product of res.data.products) {
+                    try {
+                        const productRes = await apiClient.get('/products/' + product.productId, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+                        products.push(productRes.data);
+                    } catch (err) {
+                        setError('Failed to fetch product');
+                    }
+                }
+                setCart(products);
+                setOrder(res.data);
+            } catch (err) {
+                setError('No orders found');
+            }
+        };
+
+        fetchOrderDetails();
+    }, []);
 
     const handleDelete = () => {
         apiClient.delete('/order/' + id, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })

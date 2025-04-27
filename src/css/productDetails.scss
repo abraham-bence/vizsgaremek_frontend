@@ -41,23 +41,31 @@
   
   .action-buttons {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 1rem;
   
     .btn {
-      padding: 1rem;
-      font-size: 1.2rem;
+      padding: 0.7rem;
       border-radius: 5px;
     }
   
     .btn-primary {
       background-color: #4a91e2;
       border-color: #4a91e2;
+
+      &:hover {
+        background-color: #3a7bc1;
+        border-color: #3a7bc1;
+      }
     }
   
     .btn-outline-danger {
       border-color: red;
       color: red;
+      &:hover {
+        background-color: red;
+        color: white;
+      }
     }
   }
   

@@ -76,7 +76,7 @@ function ProductDetails() {
     return (
         <div className='body'>
             <div className="navborder fixed">
-                <NavigationBar className={`my-navbar `} />
+                <NavigationBar/>
             </div>
             <Container className="product-details-container">
                 <Row className="product-details">
