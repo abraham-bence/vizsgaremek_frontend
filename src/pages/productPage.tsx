@@ -120,7 +120,7 @@ function ProductPage() {
             </div>
             <Container className='mt-5'>
                 <Row>
-                    <Col sm={2} className='mr-2'>
+                    <Col sm={12} md={3} lg={3} xl={2} className='filterCell'>
                         <Filter
                             selectedType={selectedType}
                             selectedManufacturers={selectedManufacturers}
@@ -132,7 +132,7 @@ function ProductPage() {
                             handlePriceFilter={handlePriceFilter}
                             resetFilters={resetFilters} />
                     </Col>
-                    <Col sm={10} className='productCell'>
+                    <Col sm={12} md={9} lg={9} xl={10} className='productCell mt-2'>
                         <Products />
                     </Col>
                 </Row>

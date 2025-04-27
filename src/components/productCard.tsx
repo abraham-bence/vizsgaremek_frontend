@@ -31,8 +31,8 @@ function ProductCard({ product, main, onAdd, onLike, isLiked, onRemove }: Props)
       />
       <Card.Body onClick={handleNavigation} style={{ cursor: 'pointer' }}>
         <Card.Title>{product.name}</Card.Title>
-        <Card.Text>{product.price}</Card.Text>
-        {product.quantity && <Card.Text>Quantity: {product.quantity}</Card.Text>}
+        <Card.Text>{product.price} $</Card.Text>
+        {onRemove && <Card.Text>Quantity: {product.quantity} </Card.Text>}
       </Card.Body>
       {main ? (
         <Card.Footer>
@@ -46,9 +46,14 @@ function ProductCard({ product, main, onAdd, onLike, isLiked, onRemove }: Props)
                 <MdOutlineAddShoppingCart className='icon' />
               </Button>
             ) : (
-              <Button onClick={() => onRemove?.(product)}>
-                <MdOutlineRemoveShoppingCart className='icon' />
-              </Button>
+              <div>
+                <Button onClick={() => onAdd?.(product)}>
+                  <MdOutlineAddShoppingCart className='icon' />
+                </Button>
+                <Button onClick={() => onRemove?.(product)}>
+                  <MdOutlineRemoveShoppingCart className='icon' />
+                </Button>
+              </div>
             )}
           </div>
         </Card.Footer>

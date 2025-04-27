@@ -49,9 +49,41 @@ function Cart() {
         });
     };
 
+    const handleCartAdd = (product: Product) => {
+        setCart((prev) => {
+          const existingProductIndex = prev.findIndex((p) => p.id === product.id);
+          if (existingProductIndex !== -1) {
+            // If product is already in the cart, increment the quantity
+            const updatedCart = [...prev];
+            updatedCart[existingProductIndex] = {
+              ...updatedCart[existingProductIndex],
+              quantity: updatedCart[existingProductIndex].quantity + 1,
+            };
+            setSnackbarText(`"${product.name}" added to cart 😄`);
+            setShowSnackbar(true);
+            setTimeout(() => setShowSnackbar(false), 3000); // auto-hide in 3s
+            return updatedCart;
+          }
+          setSnackbarText(`"${product.name}" added to cart 😄`);
+          setShowSnackbar(true);
+          setTimeout(() => setShowSnackbar(false), 3000); // auto-hide in 3s
+          // If product is not in the cart, add it with quantity 1
+          return [...prev, { ...product, quantity: 1 }];
+        });
+      };
+
     // Handle product removal from cart
     const handleRemoveFromCart = (product: Product) => {
-        const updatedCart = cart.filter((item) => item.id !== product.id);
+        const updatedCart = cart.filter((item) => {
+            if (item.id === product.id) {
+                if (item.quantity > 1) {
+                    item.quantity -= 1; // Decrease quantity
+                    return true; // Keep this item in the cart
+                }
+                return false; // Remove this item from the cart
+            }
+            return true; // Keep other items in the cart
+        });
         setCart(updatedCart);
         localStorage.setItem('cart', JSON.stringify(updatedCart)); // update localStorage
         setSnackbarText(`Removed "${product.name}" from cart 😞`);
@@ -70,7 +102,7 @@ function Cart() {
     return (
         <div>
             <div className="navborder fixed">
-                <NavigationBar className={`my-navbar`} />
+                <NavigationBar/>
             </div>
             <div className='myContainer'>
                 {cart.length > 0 ? (
@@ -88,6 +120,7 @@ function Cart() {
                                     <ProductCard
                                         product={product}
                                         onRemove={handleRemoveFromCart}
+                                        onAdd={handleCartAdd}
                                         onLike={handleLikeToggle}
                                         isLiked={likedProducts.some((p) => p.id === product.id)}
                                         main

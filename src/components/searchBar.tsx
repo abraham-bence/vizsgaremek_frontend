@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { debounce } from "lodash";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { RiSearch2Line } from "react-icons/ri";
@@ -8,9 +8,10 @@ interface Props {
   resetFilters?: () => void
 }
 
-export default function SearchBar({resetFilters} : Props) {
+export default function SearchBar({ resetFilters }: Props) {
   const [search, setSearch] = useSearchParams();
   const [inputValue, setInputValue] = useState(search.get("query") ?? "");
+  const navigate = useNavigate();
 
   useEffect(() => {
     setInputValue(search.get("query") ?? ""); // Sync state with URL
@@ -25,6 +26,8 @@ export default function SearchBar({resetFilters} : Props) {
       } else {
         search.set("query", text);
       }
+      navigate("/products"); // Navigate to products page
+
       setSearch(search, { replace: true });
     }, 350),
     [search, setSearch]
@@ -38,7 +41,8 @@ export default function SearchBar({resetFilters} : Props) {
 
   function handleClose() {
     setInputValue(""); // Clear input field
-    resetFilters?.()
+    search.delete("query"); // Remove query from URL
+    setSearch(search, { replace: true }); // Update URL without adding to history
   }
 
   return (

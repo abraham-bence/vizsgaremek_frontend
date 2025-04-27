@@ -15,8 +15,10 @@ function NavigationBar({ resetFilters }: Props) {
             <Container>
                 <Navbar.Brand href="/">
                     <img src="src/assets/logo1.png" className="brand-icon" alt="logo" />{' '}
-                    PixelForge
+                    <span className='brand-text'>PixelForge</span>
                 </Navbar.Brand>
+
+                <SearchBar resetFilters={resetFilters} />
 
                 <Navbar.Toggle aria-controls="offcanvasNavbar" />
 
@@ -37,9 +39,7 @@ function NavigationBar({ resetFilters }: Props) {
                             </Nav.Link>
                         </Nav>
 
-                        <div className="d-flex flex-grow-1 justify-content-center my-2 my-md-0">
-                            <SearchBar resetFilters={resetFilters} />
-                        </div>
+
 
                         <Nav className="ms-auto d-flex align-items-center">
                             <Nav.Link href="/favorites">

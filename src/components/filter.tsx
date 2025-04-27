@@ -51,7 +51,7 @@ function Filter({ selectedType, selectedManufacturers, toggleType, toggleManufac
 
   return (
     <div className="filter">
-      <h4>Filter by Type</h4>
+      <h4>Type</h4>
       {types.map((type) => (
         <div key={type.type}>
           <input
@@ -64,7 +64,7 @@ function Filter({ selectedType, selectedManufacturers, toggleType, toggleManufac
         </div>
       ))}
 
-      <h4>Filter by Manufacturer</h4>
+      <h4>Manufacturer</h4>
       {filteredManufacturers.map((manufacturer) => (
         <div key={manufacturer.manufacturer}>
           <input
@@ -78,7 +78,7 @@ function Filter({ selectedType, selectedManufacturers, toggleType, toggleManufac
         </div>
       ))}
 
-      <h4>Filter by Price</h4>
+      <h4>Price</h4>
       <div className="price-slider">
         <Slider
           range
