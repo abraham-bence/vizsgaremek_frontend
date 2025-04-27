@@ -20,8 +20,9 @@ Ez egy **React + TypeScript** alapú webalkalmazás, amely **SCSS**-t használ s
    ```bash
    git clone https://github.com/abraham-bence/vizsgaremek_frontend.git
    cd vizsgaremek_frontend
-
-npm install
+   npm install
 npm run dev
 npm run build
 npm run preview
+    ```
+
