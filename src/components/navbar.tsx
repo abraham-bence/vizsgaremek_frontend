@@ -25,7 +25,7 @@ function NavigationBar({ resetFilters }: Props) {
                 <Navbar.Offcanvas
                     id="offcanvasNavbar"
                     aria-labelledby="offcanvasNavbarLabel"
-                    placement="end" // 🔥 this is the key!
+                    placement="end" 
                     className="slide-navbar"
                 >
                     <Offcanvas.Header closeButton>
