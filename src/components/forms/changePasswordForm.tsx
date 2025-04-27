@@ -76,7 +76,7 @@ function ChangePasswordForm() {
                 <Form.Group className="mb-3">
                     <Form.Label>Old password</Form.Label>
                     <InputGroup hasValidation>
-                        <Form.Control name='oldPassword' type={showPassword ? 'text' : 'password'} onChange={handleChange} value={data.oldPassword} placeholder="Enter email" className={errors?.oldPassword ? "is-invalid" : ""} />
+                        <Form.Control name='oldPassword' type={showPassword ? 'text' : 'password'} onChange={handleChange} value={data.oldPassword} placeholder="Old password" className={errors?.oldPassword ? "is-invalid" : ""} />
                         <Button
                             variant="outline-secondary"
                             onClick={togglePassword}
@@ -93,7 +93,7 @@ function ChangePasswordForm() {
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>New password</Form.Label>
                     <InputGroup hasValidation>
-                        <Form.Control name='newPassword' type={showPassword2 ? 'text' : 'password'} onChange={handleChange} value={data.newPassword} placeholder="Password" className={errors?.newPassword ? "is-invalid" : ""} />
+                        <Form.Control name='newPassword' type={showPassword2 ? 'text' : 'password'} onChange={handleChange} value={data.newPassword} placeholder="New password" className={errors?.newPassword ? "is-invalid" : ""} />
                         <Button
                             variant="outline-secondary"
                             onClick={togglePassword2}

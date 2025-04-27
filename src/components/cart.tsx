@@ -52,8 +52,7 @@ function Cart() {
     const handleCartAdd = (product: Product) => {
         setCart((prev) => {
           const existingProductIndex = prev.findIndex((p) => p.id === product.id);
-          if (existingProductIndex !== -1) {
-            // If product is already in the cart, increment the quantity
+
             const updatedCart = [...prev];
             updatedCart[existingProductIndex] = {
               ...updatedCart[existingProductIndex],
@@ -62,13 +61,8 @@ function Cart() {
             setSnackbarText(`"${product.name}" added to cart 😄`);
             setShowSnackbar(true);
             setTimeout(() => setShowSnackbar(false), 3000); // auto-hide in 3s
+            localStorage.setItem('cart', JSON.stringify(updatedCart));
             return updatedCart;
-          }
-          setSnackbarText(`"${product.name}" added to cart 😄`);
-          setShowSnackbar(true);
-          setTimeout(() => setShowSnackbar(false), 3000); // auto-hide in 3s
-          // If product is not in the cart, add it with quantity 1
-          return [...prev, { ...product, quantity: 1 }];
         });
       };
 
